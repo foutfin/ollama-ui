@@ -1,14 +1,15 @@
-import ollama from "../../assets/ollama.png"
-function Header(){
+import Settings from "./Settings"
+import ModelSelect from "./ModelSelect"
+import ToggleVariant from "./ToggleVariant";
+
+
+function Header() {
     return (
-    <header className="p-2 flex items-center ">
-        <div className="w-[32px]">
-            <img className="w-100 h-100" src={ollama} alt="" />
-        </div>
-        <div className="ml-auto border-[1px] border-black rounded-md">
-            <button className="px-1 py-1">change theme</button>
-        </div>
-    </header>)
+        <header className="bg-background p-2   px-4 flex items-center shadow-md  justify-between">
+            <Settings  />
+            <ModelSelect  />
+            <ToggleVariant/>
+        </header>)
 }
 
 export default Header

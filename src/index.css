@@ -6,7 +6,65 @@
 
 
 @layer base {
-    html {
+
+    body {
         font-family: 'Fira Sans', sans-serif;
+        background-color: var(--theme-secondary);
     }
+
+    .theme-light{
+        --theme-background:#f1f9f5;
+        --theme-primary:#5cad83;
+        --theme-secondary:#a7b4d2;
+        --theme-accent:#807cbb;
+        --theme-text:#030705;
+        --theme-secondary-background:rgba(0, 0, 0, 0.09);
+        --theme-drop-shadow-one : rgb(0 0 0 / 0.04);
+        --theme-drop-shadow-one : rgb(0 0 0 / 0.01);
+    }
+
+    .theme-dark{
+        --theme-background:#050b05;
+        --theme-primary:#50a244;
+        --theme-secondary:#432c68;
+        --theme-accent:#8c3b74;
+        --theme-text:#f9fcf8;
+        --theme-secondary-background:rgba(255, 255, 255, 0.14);
+        --theme-drop-shadow-one : rgba(255, 255, 255, 0);
+        --theme-drop-shadow-one : rgba(255, 255, 255, 0);
+    }
+
+
+
+    /* pre{
+        overflow:scroll;
+        background-color: #807cbb;
+        margin:0;
+        padding: 0;
+        width:100%;
+        
+    } */
   }
+
+  /* #codescroller,#scroller{
+    scrollbar-color:var(--theme-secondary-background);
+    scrollbar-width:thin;
+} */
+
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+
+ 
+
+::-webkit-scrollbar-track {  
+    background: var(--theme-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-secondary);
+    
+}
+ 
