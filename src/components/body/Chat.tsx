@@ -98,7 +98,7 @@ function Chat({ actor, body, scroller, scrollview }: ChatProps) {
             scrollview.current?.scrollIntoView({ behavior: "smooth", block: "end" })
         }
     }, [])
-    const chatActor =  ( actor.length > 0) ? actor[0] :"Y" 
+    const chatActor =  (( actor.length > 0) ? actor[0] :"Y" ).toUpperCase()
     return (
         <div className="  flex  items-start">
             {actor == "You" ?
@@ -178,7 +178,7 @@ function ResponseChat({ controller, setCurrentResponse, id, setChats, setGenerat
         }
         readLoop()
     }, [])
-    const chatActor =  ( actor.length > 0) ? actor[0] :"Y" 
+    const chatActor =  (( actor.length > 0) ? actor[0] :"Y" ).toUpperCase()
     useEffect(() => {
         if (haveToScroll.current) {
             scrollview.current?.scrollIntoView({ block: "end" })

@@ -4,7 +4,14 @@ import { listModels, checkBaseurl, replaceSlashAtEnd } from "../../utils/utils"
 import toast from "react-hot-toast"
 import Toast from "../other/Toast"
 
-function Settings() {
+type applicationState = "loading" | "error" | "success"
+
+interface SettingsProp{
+    setAppState?:React.Dispatch<React.SetStateAction<applicationState>>
+
+}
+
+function Settings({setAppState}:SettingsProp) {
     const [url, setUrl] = useState<string>("")
     const [select, setSelect] = useState<"on" | "off" | "fetch">("off")
     const baseUrl = useSetting(state => state.baseUrl)
@@ -15,11 +22,12 @@ function Settings() {
         e.stopPropagation()
         setSelect("fetch")
         toast.custom(<Toast body="Checking Url" />,{id:"toast"})
-        if (await checkBaseurl(replaceSlashAtEnd(url))) {
-            changeBaseUrl(url)
+        const sUrl = replaceSlashAtEnd(url)
+        if (await checkBaseurl(sUrl)) {
+            changeBaseUrl(sUrl)
             setSelect("on")
             toast.custom(<Toast body="Now fetching model list" />,{id:"toast"})
-            const models = await listModels(url)
+            const models = await listModels(sUrl)
             if (models.length == 0) {
                 toast.custom(<Toast body="No models" />,{id:"toast"})
                 console.log("No models available")
@@ -28,6 +36,7 @@ function Settings() {
             }
             toast.custom(<Toast body="Models added" />,{id:"toast"})
             setModels(models)
+            if(setAppState) setAppState("success")
             return
         }
         setSelect("on")

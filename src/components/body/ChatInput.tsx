@@ -35,46 +35,6 @@ interface responsechat{
 }
 
 
-
-// async function makeRequest(url: string, model: string | undefined, b: string, setGenerating: React.Dispatch<React.SetStateAction<boolean>>, setCurrentResponse: React.Dispatch<React.SetStateAction<chat | null>>, setChats: React.Dispatch<React.SetStateAction<chat[]>>) {
-//     const decoder = new TextDecoder("utf-8")
-//     const response = await fetch(`${url}/api/generate`,
-//         {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({ model: model, prompt: b })
-//         })
-
-
-
-//     const reader = response.body?.getReader();
-//     let assistanceResponse: string = ""
-//     const id = `${Math.floor(Date.now() / 1000)}`
-
-//     while (true) {
-//         const val = await reader?.read();
-//         if (val) {
-//             if (val.done) {
-//                 setChats(p => [...p, { id: id, actor: "Assistance", body: assistanceResponse }])
-//                 setCurrentResponse(null)
-//                 setGenerating(false)
-//                 break
-//             }
-
-//             assistanceResponse += JSON.parse(decoder.decode(val.value)).response as string
-//             setCurrentResponse({ id: id, actor: "Assistance", body: assistanceResponse })
-
-//         }
-
-//     }
-
-// }
-
-
-
-
 async function generateChat(url: string, model: string, prompt: string, signal: AbortSignal): Promise<ReadableStreamDefaultReader<Uint8Array> | undefined> {
     try {
         const response = await fetch(`${url}/api/generate`, {
@@ -101,8 +61,6 @@ async function generateChat(url: string, model: string, prompt: string, signal: 
 interface chatInputProps {
     setChats: React.Dispatch<React.SetStateAction<chat[]>>,
     setCurrentResponse: React.Dispatch<React.SetStateAction<responsechat | null>>,
-    // currentModel: string | undefined,
-    // baseUrl: string,
     generating:boolean,
     setGenerating:React.Dispatch<React.SetStateAction<boolean>>,
     controller: React.MutableRefObject<AbortController>
@@ -128,7 +86,6 @@ function ChatInput({controller,generating,setGenerating, setChats, setCurrentRes
                     setCurrentResponse({ id: id, actor:currentModel.split(":")[0] , stream: reader })
                 }
             }
-            // makeRequest(baseUrl, currentModel, body, setGenerating, setCurrentResponse, setChats)
         }
     }
 
@@ -160,24 +117,9 @@ function ChatInput({controller,generating,setGenerating, setChats, setCurrentRes
                                 <h2>Chat History</h2>
                             </div>
                             <div className="mb-[20px] w-full max-h-[500px] px-4   flex flex-col gap-[10px] overflow-y-auto ">
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                {/* <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" />
-                                <HistoryCard title="This is test" /> */}
-
-
+                                <HistoryCard title="network request" />
+                                <HistoryCard title="history" />
+                                <HistoryCard title="wrote an email" />
                             </div>
                             <button className="p-2 rounded-full bg-primary group ">
                                 <svg xmlns="http://www.w3.org/2000/svg" className=" hover:stroke-white  icon icon-tabler icon-tabler-plus" width={24} height={24} viewBox="0 0 24 24" strokeWidth={2} stroke="#fff" fill="none" strokeLinecap="round" strokeLinejoin="round">

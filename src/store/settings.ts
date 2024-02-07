@@ -1,8 +1,5 @@
 import { create } from "zustand"
 
-// interface Setting{
-
-// }
 
 interface SettingStore{
     baseUrl : string
